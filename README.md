@@ -1,268 +1,390 @@
-# OrbitIQ-Space-Mission-Intelligence-Platform
-Project Type
+# OrbitIQ – Space Mission Intelligence Platform
 
-Data Analytics + Business Intelligence + SQL
+## Project Type
 
-Difficulty Level
+Data Analytics | Business Intelligence | SQL | PostgreSQL | Power BI
 
-Intermediate to Advanced
+# Project Overview
 
-Duration
+OrbitIQ is a Space Mission Intelligence Platform designed to analyze historical space launches conducted by major organizations including ISRO, NASA, SpaceX, Roscosmos, CASC, Arianespace, JAXA, Blue Origin, and others.
 
-4–5 Weeks
+The platform leverages SQL, PostgreSQL, Power BI, and Python to transform raw launch data into actionable insights. Through advanced analytics and interactive dashboards, OrbitIQ evaluates mission reliability, launch trends, organizational performance, and the evolution of the global space industry.
 
-Goal
-
-Build a Space Mission Intelligence Platform that analyzes global space missions from major agencies such as ISRO, NASA, ESA, SpaceX, CNSA, and Roscosmos.
-
-The platform will use SQL, PostgreSQL, Power BI, and Python to identify mission trends, compare agency performance, evaluate reliability, and provide strategic insights into the global space ecosystem.
-
-The project will include a dedicated ISRO analytics section to benchmark India's space program against leading international agencies.
+A dedicated ISRO Analytics module benchmarks India's space program against leading international organizations.
 
-Problem Statement
-
-Space agencies launch thousands of missions over decades, but understanding long-term mission success, reliability, strategic focus, and operational performance requires large-scale analytics.
-
-Current public datasets contain mission information but do not provide:
-
-Comparative agency analysis
-Reliability scoring
-Long-term success trends
-Strategic mission portfolio insights
-ISRO benchmarking against global agencies
-
-The objective is to transform raw mission data into actionable insights using SQL analytics and interactive dashboards.
-
-Objectives
-Analyze mission success rates across agencies.
-Study launch trends over time.
-Compare ISRO with global competitors.
-Create a custom Mission Reliability Index.
-Visualize mission portfolio evolution.
-Build interactive Power BI dashboards.
-Demonstrate advanced SQL skills.
-Dataset
-
-Primary Dataset:
-Global Space Missions Dataset (1957–2035)
+---
 
-Expected Records:
-10,000+ missions
+# Problem Statement
 
-Expected Attributes:
+Since the beginning of the Space Age in 1957, thousands of space missions have been launched worldwide. While launch data is publicly available, it often lacks meaningful analytical insights regarding:
 
-Mission Name
-Agency
-Launch Date
-Launch Vehicle
-Orbit Type
-Mission Type
-Success Status
-Payload Mass
-Cost (if available)
-Country
-Technology Stack
-Data Processing
-Python
-Pandas
-NumPy
-Database
-PostgreSQL
-Querying
-SQL
-Visualization
-Power BI
-Documentation
-GitHub
-Markdown
-Database Schema
+* Organizational performance
+* Reliability benchmarking
+* Historical launch trends
+* Launch site intelligence
+* Long-term operational consistency
+* Strategic comparisons between global space organizations
 
-Tables:
+OrbitIQ addresses these challenges by transforming raw launch records into a comprehensive business intelligence platform that supports data-driven analysis of the global space ecosystem.
 
-Agency
+---
 
-agency_id
-agency_name
-country
+# Objectives
 
-Mission
+* Analyze mission success rates across organizations
+* Study launch trends over time
+* Compare ISRO with global competitors
+* Develop a custom Mission Reliability Index (MRI)
+* Evaluate launch site reliability
+* Measure long-term operational consistency
+* Build interactive Power BI dashboards
+* Demonstrate advanced SQL analytics techniques
 
-mission_id
-mission_name
-agency_id
-launch_date
-mission_type
-orbit_type
-success_status
-payload_mass
+---
 
-LaunchVehicle
+# Dataset
 
-vehicle_id
-vehicle_name
-capacity
+## Primary Dataset
 
-MissionVehicle
+Space Missions Dataset (1957–Present)
 
-mission_id
-vehicle_id
-Advanced SQL Concepts Used
-Window Functions
-RANK()
-DENSE_RANK()
-ROW_NUMBER()
-LAG()
-LEAD()
-AVG() OVER()
-CTEs
+## Source
 
-WITH statements for multi-step analytics.
+NextSpaceFlight Launch Database
 
-Aggregations
-SUM()
-AVG()
-COUNT()
-GROUP BY
-HAVING
-Joins
-INNER JOIN
-LEFT JOIN
-SELF JOIN
-Key Business Questions
-Q1
+## Dataset Statistics
 
-Which agencies have the highest mission success rates?
+* 4,324+ Space Missions
+* 56 Organizations
+* 137 Launch Sites
+* Coverage from 1957 to Present
 
-Insight:
-Operational excellence comparison.
+## Available Attributes
 
-Q2
+| Column         | Description                        |
+| -------------- | ---------------------------------- |
+| Company Name   | Organization conducting the launch |
+| Location       | Launch site                        |
+| Datum          | Launch date and time               |
+| Detail         | Rocket and mission information     |
+| Status Rocket  | Rocket operational status          |
+| Rocket         | Mission cost (where available)     |
+| Status Mission | Mission outcome                    |
 
-How have success rates changed over time?
+---
 
-Insight:
-Technology maturity trends.
+# Technology Stack
 
-Q3
+## Data Processing
 
-Which agencies improved most over the last decade?
+* Python
+* Pandas
+* NumPy
 
-Insight:
-Growth and innovation measurement.
+## Database
 
-Q4
+* PostgreSQL
 
-Which launch vehicles are most reliable?
+## Querying & Analytics
 
-Insight:
-Engineering reliability.
+* SQL
 
-Q5
+## Visualization
 
-How has mission focus evolved?
+* Power BI
 
-Insight:
-Shift from Earth Observation to Deep Space Exploration.
+## Documentation
 
-Q6
+* GitHub
+* Markdown
 
-How does ISRO compare to NASA, ESA and SpaceX?
+---
 
-Insight:
-Global benchmarking.
+# Database Schema
 
-Q7
+## Table: space_missions
 
-Which agencies have the most balanced mission portfolios?
+| Column               | Data Type          |
+| -------------------- | ------------------ |
+| mission_id           | SERIAL PRIMARY KEY |
+| company_name         | VARCHAR(100)       |
+| location             | TEXT               |
+| launch_datetime      | TIMESTAMP          |
+| rocket_detail        | TEXT               |
+| rocket_status        | VARCHAR(30)        |
+| mission_cost_million | NUMERIC            |
+| mission_status       | VARCHAR(30)        |
 
-Insight:
-Strategic diversification.
+---
 
-Custom Metric
-Mission Reliability Index
+# Advanced SQL Concepts Used
 
-Purpose:
-Create a proprietary metric to compare agencies.
+## Window Functions
 
-Formula:
+* RANK()
+* DENSE_RANK()
+* ROW_NUMBER()
+* LAG()
+* LEAD()
+* AVG() OVER()
 
-Reliability Index =
-0.60 × Success Rate
-+
-0.20 × Mission Diversity Score
-+
-0.20 × Launch Frequency Score
+## Common Table Expressions (CTEs)
 
-Output:
-Agency ranking based on overall operational performance.
+* Multi-step analytical workflows
+* Intermediate aggregations
+* Ranking calculations
 
-Dashboard Structure
-Page 1
+## Aggregations
 
-Executive Overview
+* COUNT()
+* SUM()
+* AVG()
+* GROUP BY
+* HAVING
 
-KPIs:
+## Joins
 
-Total Missions
-Success Rate
-Total Agencies
-Active Launch Vehicles
+* INNER JOIN
+* LEFT JOIN
+* SELF JOIN
 
-Charts:
+---
 
-Missions per Year
-Global Mission Distribution
-Page 2
+# Key Business Questions
 
-Agency Performance
+## Q1. Which organizations have the highest mission success rates?
 
-Charts:
+**Insight:** Compare operational excellence across organizations.
 
-Success Rate Ranking
-Reliability Index Ranking
-Top Performing Agencies
-Page 3
+---
 
-Mission Trends
+## Q2. How have launch success rates changed over time?
 
-Charts:
+**Insight:** Measure technological maturity and operational improvement.
 
-Yearly Mission Growth
-Success Trend Analysis
-Decade Comparison
-Page 4
+---
 
-Mission Portfolio Analysis
+## Q3. Which organizations improved the most over the last decade?
 
-Charts:
+**Insight:** Evaluate growth and innovation trends.
 
-Mission Type Distribution
-Orbit Distribution
-Agency Specialization
-Page 5
+---
 
-ISRO Strategic Deep Dive
+## Q4. Which launch sites are the most reliable?
 
-Charts:
+**Insight:** Assess launch infrastructure performance.
 
-ISRO vs NASA
-ISRO vs ESA
-ISRO vs SpaceX
+---
 
-Metrics:
+## Q5. How has global launch activity evolved since 1957?
 
-Success Rate
-Launch Frequency
-Mission Diversity
-Deliverables
-Cleaned Dataset
-PostgreSQL Database
-SQL Query Collection
-Power BI Dashboard
-Project Documentation
-GitHub Repository
-Resume Outcome
+**Insight:** Understand the growth of the global space industry.
 
-Space Mission Intelligence Platform | SQL, PostgreSQL, Power BI, Python
+---
 
-Developed a data analytics platform analyzing global space missions across ISRO, NASA, ESA, SpaceX and Roscosmos. Designed advanced SQL workflows using window functions and CTEs, created a custom Mission Reliability Index, and built interactive Power BI dashboards to evaluate mission success, agency performance, and strategic space exploration trends.
+## Q6. How does ISRO compare with NASA, SpaceX, Roscosmos, CASC, and Arianespace?
+
+**Insight:** Benchmark India's space program against leading competitors.
+
+---
+
+## Q7. Which organizations have the most stable success rates year-over-year?
+
+**Insight:** Identify organizations demonstrating long-term operational consistency.
+
+---
+
+# Custom Metric
+
+## Mission Reliability Index (MRI)
+
+### Purpose
+
+The Mission Reliability Index (MRI) is a proprietary metric developed to evaluate organizations based on reliability, operational scale, and longevity.
+
+### Formula
+
+MRI =
+
+0.70 × Success Rate
+
+* 0.20 × Launch Volume Score
+
+* 0.10 × Operational Longevity Score
+
+### Output
+
+Organizations are ranked based on overall operational performance and consistency.
+
+---
+
+# Dashboard Structure
+
+## Page 1 – Executive Overview
+
+### KPIs
+
+* Total Missions
+* Overall Success Rate
+* Total Organizations
+* Active Rockets
+
+### Visualizations
+
+* Launches per Year
+* Global Launch Distribution
+* Success vs Failure Overview
+
+---
+
+## Page 2 – Organization Performance
+
+### Visualizations
+
+* Success Rate Ranking
+* Mission Reliability Index Ranking
+* Top Launch Organizations
+* Organization Comparison Dashboard
+
+---
+
+## Page 3 – Historical Trends
+
+### Visualizations
+
+* Launches per Year
+* Success Rate Trend Analysis
+* Year-over-Year Growth
+* Decade Comparison
+
+---
+
+## Page 4 – Launch Site Intelligence
+
+### Visualizations
+
+* Top Launch Sites
+* Launch Site Reliability Ranking
+* Geographic Distribution of Launches
+* Launch Site Performance Analysis
+
+---
+
+## Page 5 – ISRO Strategic Deep Dive
+
+### Comparative Analysis
+
+* ISRO vs NASA
+* ISRO vs SpaceX
+* ISRO vs Roscosmos
+* ISRO vs CASC
+* ISRO vs Arianespace
+
+### Metrics
+
+* Mission Count
+* Success Rate
+* Operational Longevity
+* Mission Reliability Index
+
+### Visualizations
+
+* Organization Comparison Charts
+* ISRO Historical Performance Trend
+* Reliability Comparison Dashboard
+
+---
+
+# Key Insights Expected
+
+* Identify the most reliable launch organizations.
+* Benchmark ISRO against leading global competitors.
+* Analyze long-term growth of global launch activity.
+* Evaluate launch site performance and reliability.
+* Measure operational consistency across organizations.
+* Rank organizations using the Mission Reliability Index.
+* Understand the evolution of the global space industry since 1957.
+
+---
+
+# Project Structure
+
+```text
+OrbitIQ-Space-Mission-Intelligence-Platform
+│
+├── data/
+│   ├── raw/
+│   └── processed/
+│
+├── notebooks/
+│   ├── data_cleaning.ipynb
+│   └── exploratory_analysis.ipynb
+│
+├── sql/
+│   ├── 01_success_rate_analysis.sql
+│   ├── 02_trend_analysis.sql
+│   ├── 03_launch_site_reliability.sql
+│   ├── 04_decade_analysis.sql
+│   ├── 05_mission_reliability_index.sql
+│   ├── 06_isro_benchmark.sql
+│   └── 07_consistency_analysis.sql
+│
+├── powerbi/
+│   └── OrbitIQ.pbix
+│
+├── screenshots/
+│
+├── README.md
+└── requirements.txt
+```
+
+---
+
+# Deliverables
+
+* Cleaned Dataset
+* PostgreSQL Database
+* SQL Query Collection
+* Power BI Dashboard
+* Project Documentation
+* GitHub Repository
+
+---
+
+# Implementation Timeline
+
+## Week 1 – Data Preparation
+
+* Data exploration and validation
+* Data cleaning and preprocessing
+* PostgreSQL database setup
+* Data loading and schema creation
+
+## Week 2 – SQL Analytics
+
+* Development of analytical SQL queries
+* Window function implementation
+* CTE-based analysis workflows
+* Validation and optimization
+
+## Week 3 – Dashboard Development
+
+* Power BI data modeling
+* Dashboard design and implementation
+* KPI creation
+* Interactive visualization development
+
+## Week 4 – Documentation and Deployment
+
+* Dashboard refinement
+* Documentation preparation
+* GitHub repository organization
+* Final project review
+
+---
+
+# Resume Outcome
+
+**OrbitIQ – Space Mission Intelligence Platform | SQL, PostgreSQL, Power BI, Python**
+
+Developed a data analytics platform analyzing 4,324+ global space missions conducted by leading organizations including ISRO, NASA, SpaceX, Roscosmos, and CASC. Designed advanced SQL workflows using window functions and CTEs, created a custom Mission Reliability Index, and built interactive Power BI dashboards to evaluate launch success trends, launch site reliability, and organizational performance across the global space ecosystem.
