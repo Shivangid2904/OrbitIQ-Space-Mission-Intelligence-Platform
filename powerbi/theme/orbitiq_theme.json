@@ -1,0 +1,16 @@
+{
+  "name": "OrbitIQ Premium Dark",
+  "dataColors": [
+    "#00F0FF",
+    "#00E676",
+    "#FF3838",
+    "#8E9CA6",
+    "#3F51B5",
+    "#E040FB",
+    "#FFEB3B",
+    "#FF5722"
+  ],
+  "background": "#06090D",
+  "foreground": "#FFFFFF",
+  "tableAccent": "#00F0FF"
+}
