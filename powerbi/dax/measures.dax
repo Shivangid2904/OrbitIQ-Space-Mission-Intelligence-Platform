@@ -1,0 +1,114 @@
+-- =========================================================================
+-- ORBITIQ DAX MEASURES LEDGER
+-- Table: _Measures
+-- =========================================================================
+
+-- 1. Core KPIs
+Total Launches = COUNT(fact_launches[launch_id])
+
+Successful Launches = CALCULATE([Total Launches], fact_launches[is_success] = 1)
+
+Failed Launches = CALCULATE([Total Launches], fact_launches[is_success] = 0)
+
+Success Rate = DIVIDE([Successful Launches], [Total Launches], 0)
+
+-- 2. Entity Counts
+Total Organizations = DISTINCTCOUNT(fact_launches[company_id])
+
+Total Launch Sites = DISTINCTCOUNT(fact_launches[location_id])
+
+Total Rocket Models = DISTINCTCOUNT(dim_rocket[rocket_model])
+
+Active Rockets = CALCULATE(DISTINCTCOUNT(fact_launches[rocket_id]), dim_rocket[rocket_status] = "Active")
+
+-- 3. Financial Metrics
+Average Mission Cost = AVERAGE(fact_launches[cost_usd_millions])
+
+Total Mission Cost = SUM(fact_launches[cost_usd_millions])
+
+-- 4. Temporal Trends
+Launches Per Year = 
+CALCULATE(
+    [Total Launches],
+    ALLEXCEPT(dim_date, dim_date[launch_year])
+)
+
+Launches Per Decade = 
+CALCULATE(
+    [Total Launches],
+    ALLEXCEPT(dim_date, dim_date[launch_decade])
+)
+
+YoY Growth = 
+VAR CurrentYearLaunches = [Total Launches]
+VAR PrevYearLaunches = 
+    CALCULATE(
+        [Total Launches],
+        DATEADD(dim_date[launch_datetime], -1, YEAR)
+    )
+RETURN
+    DIVIDE(CurrentYearLaunches - PrevYearLaunches, PrevYearLaunches, 0)
+
+3 Year Rolling Average = 
+AVERAGEX(
+    DATESINPERIOD(
+        dim_date[launch_datetime],
+        LASTDATE(dim_date[launch_datetime]),
+        -3,
+        YEAR
+    ),
+    [Total Launches]
+)
+
+-- 5. Analytical Rankings
+Company Rank = 
+IF(
+    ISFILTERED(dim_company[company_name]),
+    RANKX(
+        ALLSELECTED(dim_company),
+        [Total Launches],
+        ,
+        DESC,
+        Dense
+    ),
+    BLANK()
+)
+
+Launch Site Rank = 
+IF(
+    ISFILTERED(dim_location[location_name]),
+    RANKX(
+        ALLSELECTED(dim_location),
+        [Total Launches],
+        ,
+        DESC,
+        Dense
+    ),
+    BLANK()
+)
+
+Success Rank = 
+IF(
+    ISFILTERED(dim_company[company_name]),
+    RANKX(
+        ALLSELECTED(dim_company),
+        [Success Rate],
+        ,
+        DESC,
+        Dense
+    ),
+    BLANK()
+)
+
+Cost Rank = 
+IF(
+    ISFILTERED(dim_company[company_name]),
+    RANKX(
+        ALLSELECTED(dim_company),
+        [Average Mission Cost],
+        ,
+        DESC,
+        Dense
+    ),
+    BLANK()
+)
